@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pupusería Doña Marta – Menú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F8F2;--card:#FFFFFF;--ink:#1B2B21;--mute:#5E6E63;--line:#DCE5DA;
+  --green:#1F6B4A;--on-green:#FFFFFF;--maiz:#F2B705;--chile:#C8372D;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){color-scheme:dark;--bg:#131C16;--card:#1D2A21;--ink:#EDF3EA;--mute:#A3B3A8;--line:#2C3C31;--green:#3FA877;--on-green:#0F1A13;}
+}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#131C16;--card:#1D2A21;--ink:#EDF3EA;--mute:#A3B3A8;--line:#2C3C31;--green:#3FA877;--on-green:#0F1A13;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 140px}
+header{padding:28px 0 12px}
+h1{font-size:clamp(2rem,8vw,2.8rem);line-height:1.02;margin:0 0 6px;font-weight:800;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:0}
+.info{display:inline-block;margin-top:12px;padding:6px 12px;border-radius:999px;background:var(--maiz);color:#2A2200;font-weight:600;font-size:.9rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;display:flex;gap:8px;overflow-x:auto;padding:10px 0;border-bottom:1px solid var(--line)}
+nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer}
+nav button[aria-pressed="true"]{background:var(--green);color:var(--on-green);border-color:var(--green)}
+.item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.emoji{font-size:2rem;width:52px;height:52px;display:grid;place-items:center;background:var(--card);border-radius:14px;flex:none}
+.item h3{margin:0;font-size:1.05rem}
+.item p{margin:2px 0 0;color:var(--mute);font-size:.88rem}
+.price{font-weight:800;color:var(--green);margin-top:2px}
+.grow{flex:1;min-width:0}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--green);background:var(--card);color:var(--green);font:inherit;font-size:1.2rem;font-weight:800;cursor:pointer}
+.qty button.add{background:var(--green);color:var(--on-green)}
+.qty span{min-width:18px;text-align:center;font-weight:800}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--maiz);outline-offset:2px}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line);z-index:10}
+.bar button{display:flex;justify-content:space-between;width:100%;max-width:640px;margin:0 auto;padding:15px 20px;border:0;border-radius:14px;background:var(--green);color:var(--on-green);font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer}
+.bar button:disabled{background:var(--line);color:var(--mute);cursor:default}
+dialog{width:min(560px,100%);max-height:92vh;margin:auto auto 0;border:0;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));background:var(--bg);color:var(--ink);font-family:inherit}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog h2{margin:0 0 10px}
+.line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)}
+label{display:block;margin:12px 0 4px;font-weight:600;font-size:.92rem}
+input,select,textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.tot{display:flex;justify-content:space-between;font-weight:800;font-size:1.2rem;margin:16px 0 12px}
+.send{width:100%;padding:15px;border:0;border-radius:14px;background:#1FAF54;color:#fff;font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer}
+.close{float:right;background:none;border:0;color:var(--mute);font:inherit;font-size:1.6rem;cursor:pointer}
+.err{color:var(--chile);font-size:.88rem;margin:8px 0 0;min-height:1.2em}
+.pbox{margin-top:10px;padding:12px;border-radius:10px;background:var(--card);border:1px dashed var(--line);font-size:.92rem;white-space:pre-line}.pbox a{display:block;margin-top:8px;text-align:center;padding:11px;border-radius:10px;background:var(--maiz);color:#2A2200;font-weight:800;text-decoration:none;white-space:normal}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="biz"></h1>
+    <p class="sub" id="tag"></p>
+    <span class="info" id="hours"></span>
+  </header>
+  <nav id="cats" aria-label="Categorías"></nav>
+  <main id="list"></main>
+</div>
+
+<div class="bar"><button id="open" disabled><span id="count">Tu pedido está vacío</span><span id="sum"></span></button></div>
+
+<dialog id="dlg">
+  <button class="close" id="x" aria-label="Cerrar">×</button>
+  <h2>Tu pedido</h2>
+  <div id="lines"></div>
+  <label for="name">Tu nombre</label>
+  <input id="name" autocomplete="name">
+  <label for="mode">¿Cómo lo recibes?</label>
+  <select id="mode"></select>
+  <div id="addrBox">
+    <label for="addr">Dirección o punto de referencia</label>
+    <textarea id="addr" rows="2"></textarea>
+  </div>
+  <label for="pay">Forma de pago</label>
+  <select id="pay"></select>
+  <div class="pbox" id="pbox" hidden></div>
+  <label for="note">Nota (opcional)</label>
+  <input id="note" placeholder="Sin curtido, con poco picante…">
+  <div class="tot"><span>Total</span><span id="total"></span></div>
+  <button class="send" id="send">Enviar pedido por WhatsApp</button>
+  <p class="err" id="err" role="alert"></p>
+</dialog>
+
+<script>
+/* ============ EDITA SOLO ESTA SECCIÓN PARA CADA CLIENTE ============ */
+const NEGOCIO = {
+  nombre: "Pupusería Doña Marta",
+  eslogan: "Pupusas hechas al momento, con el sabor de siempre.",
+  horario: "Abierto de 4:00 p. m. a 9:00 p. m.",
+  whatsapp: "50370000000",            // código de país + número, sin + ni espacios
+  moneda: "$",
+  entregas: [                          // modalidades y su costo
+    { nombre: "Recoger en el local", costo: 0, pideDireccion: false },
+    { nombre: "Entrega en San Salvador", costo: 2, pideDireccion: true },
+    { nombre: "Entrega en Soyapango", costo: 3, pideDireccion: true }
+  ],
+  pagos: ["Efectivo", "Transferencia"],
+  datosTransferencia: "Banco: Banco Agrícola\nCuenta de ahorro: 000-000000-0\nA nombre de: Marta López",
+  linkPago: "",                        // opcional, ej.: "https://www.paypal.me/minegocio/{TOTAL}USD"
+  apiUrl: "",   // <<< PEGA AQUÍ LA URL DE TU HOJA DE GOOGLE ENTRE LAS COMILLAS (termina en /exec). Es lo ÚNICO que debes cambiar.
+  hojaCSV: "",                         // opcional: enlace CSV de Google Sheets para el menú diario,
+  menu: [
+    { cat: "Pupusas", emoji: "🫓", nombre: "Revuelta", desc: "Chicharrón, frijol y queso", precio: 1.25 },
+    { cat: "Pupusas", emoji: "🫓", nombre: "Queso con loroco", desc: "Queso y flor de loroco", precio: 1.25 },
+    { cat: "Pupusas", emoji: "🫓", nombre: "Frijol con queso", desc: "Frijol refrito y queso", precio: 1.00 },
+    { cat: "Pupusas", emoji: "🫓", nombre: "Arroz con queso", desc: "Masa de arroz, queso", precio: 1.50 },
+    { cat: "Antojitos", emoji: "🍌", nombre: "Plátanos fritos", desc: "Con crema y frijoles", precio: 3.50 },
+    { cat: "Antojitos", emoji: "🌽", nombre: "Yuca frita", desc: "Con chicharrón y curtido", precio: 4.00 },
+    { cat: "Bebidas", emoji: "🥤", nombre: "Horchata", desc: "Vaso grande", precio: 1.50 },
+    { cat: "Bebidas", emoji: "🍹", nombre: "Ensalada", desc: "Fruta picada con jugo", precio: 1.50 },
+    { cat: "Bebidas", emoji: "☕", nombre: "Café", desc: "Taza", precio: 1.00 }
+  ]
+};
+/* =================================================================== */
+
+const $ = id => document.getElementById(id);
+const cart = {};
+let activeCat = null;
+const money = n => NEGOCIO.moneda + n.toFixed(2);
+let cats = [...new Set(NEGOCIO.menu.map(p => p.cat))];
+
+function pintarCabecera() {
+  $("mode").innerHTML = ""; $("pay").innerHTML = "";
+  document.title = NEGOCIO.nombre + " – Menú";
+$("biz").textContent = NEGOCIO.nombre;
+$("tag").textContent = NEGOCIO.eslogan;
+$("hours").textContent = NEGOCIO.horario;
+NEGOCIO.entregas.forEach((e, i) => $("mode").add(new Option(e.nombre + (e.costo ? " (+" + money(e.costo) + ")" : ""), i)));
+NEGOCIO.pagos.forEach(p => $("pay").add(new Option(p, p)));
+if (NEGOCIO.linkPago) $("pay").add(new Option("Pago en línea", "Pago en línea"));
+}
+pintarCabecera();
+
+function renderCats() {
+  $("cats").innerHTML = "";
+  cats.forEach(c => {
+    const b = document.createElement("button");
+    b.textContent = c; b.setAttribute("aria-pressed", c === activeCat);
+    b.onclick = () => { activeCat = c; renderCats(); renderList(); };
+    $("cats").appendChild(b);
+  });
+}
+function renderList() {
+  $("list").innerHTML = "";
+  NEGOCIO.menu.forEach((p, i) => {
+    if (p.cat !== activeCat) return;
+    const q = cart[i] || 0;
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = '<div class="emoji" aria-hidden="true">' + p.emoji + '</div><div class="grow"><h3></h3><p></p><div class="price">' + money(p.precio) + '</div></div><div class="qty"></div>';
+    row.querySelector("h3").textContent = p.nombre;
+    row.querySelector("p").textContent = p.desc;
+    const qty = row.querySelector(".qty");
+    if (q > 0) {
+      const m = document.createElement("button"); m.textContent = "−"; m.setAttribute("aria-label", "Quitar uno"); m.onclick = () => change(i, -1);
+      const s = document.createElement("span"); s.textContent = q;
+      qty.append(m, s);
+    }
+    const a = document.createElement("button"); a.textContent = "+"; a.className = "add"; a.setAttribute("aria-label", "Agregar uno"); a.onclick = () => change(i, 1);
+    qty.appendChild(a);
+    $("list").appendChild(row);
+  });
+}
+function change(i, d) {
+  cart[i] = Math.max(0, (cart[i] || 0) + d);
+  if (!cart[i]) delete cart[i];
+  renderList(); updateBar();
+}
+const subtotal = () => Object.entries(cart).reduce((s, [i, q]) => s + NEGOCIO.menu[i].precio * q, 0);
+const envio = () => NEGOCIO.entregas[$("mode").value].costo;
+function updateBar() {
+  const n = Object.values(cart).reduce((a, b) => a + b, 0);
+  $("open").disabled = n === 0;
+  $("count").textContent = n ? "Ver pedido (" + n + ")" : "Tu pedido está vacío";
+  $("sum").textContent = n ? money(subtotal()) : "";
+}
+function renderDialog() {
+  $("lines").innerHTML = "";
+  Object.entries(cart).forEach(([i, q]) => {
+    const p = NEGOCIO.menu[i];
+    const l = document.createElement("div"); l.className = "line";
+    l.innerHTML = "<span></span><span>" + money(p.precio * q) + "</span>";
+    l.firstChild.textContent = q + " × " + p.nombre;
+    $("lines").appendChild(l);
+  });
+  $("addrBox").style.display = NEGOCIO.entregas[$("mode").value].pideDireccion ? "block" : "none";
+  $("total").textContent = money(subtotal() + envio());
+  mostrarPago();
+}
+$("open").onclick = () => { renderDialog(); $("err").textContent = ""; $("dlg").showModal(); };
+$("x").onclick = () => $("dlg").close();
+$("mode").onchange = renderDialog;
+$("send").onclick = async () => {
+  const ent = NEGOCIO.entregas[$("mode").value];
+  const nombre = $("name").value.trim(), dir = $("addr").value.trim();
+  if (!nombre) { $("err").textContent = "Escribe tu nombre para enviar el pedido."; return; }
+  if (ent.pideDireccion && !dir) { $("err").textContent = "Escribe la dirección de entrega."; return; }
+  let num = "";
+  if (NEGOCIO.apiUrl) {
+    const btn = $("send");
+    btn.disabled = true; btn.textContent = "Guardando pedido…"; $("err").textContent = "";
+    try {
+      const ctrl = new AbortController();
+      setTimeout(() => ctrl.abort(), 10000);
+      const r = await fetch(NEGOCIO.apiUrl, {
+        method: "POST", signal: ctrl.signal,
+        body: JSON.stringify({
+          nombre, direccion: dir, entrega: ent.nombre, pago: $("pay").value, nota: $("note").value.trim(),
+          items: Object.entries(cart).map(([i, q]) => ({ id: NEGOCIO.menu[i].nombre, cant: q }))
+        })
+      });
+      const j = await r.json();
+      if (j.ok) num = j.numero;
+      else { $("err").textContent = j.error || "No se pudo guardar el pedido."; btn.disabled = false; btn.textContent = "Enviar pedido por WhatsApp"; return; }
+    } catch (e) { console.warn("No se pudo guardar el pedido; se envía solo por WhatsApp.", e); }
+    btn.disabled = false; btn.textContent = "Enviar pedido por WhatsApp";
+  }
+  let t = "Hola, quiero hacer un pedido" + (num ? " N.º " + num : "") + " en " + NEGOCIO.nombre + ":\n\n";
+  Object.entries(cart).forEach(([i, q]) => { const p = NEGOCIO.menu[i]; t += "• " + q + " × " + p.nombre + " – " + money(p.precio * q) + "\n"; });
+  t += "\nSubtotal: " + money(subtotal());
+  if (ent.costo) t += "\nEnvío: " + money(ent.costo);
+  t += "\n*Total: " + money(subtotal() + ent.costo) + "*";
+  t += "\n\nNombre: " + nombre + "\nEntrega: " + ent.nombre;
+  if (ent.pideDireccion) t += "\nDirección: " + dir;
+  t += "\nPago: " + $("pay").value;
+  if ($("note").value.trim()) t += "\nNota: " + $("note").value.trim();
+  window.location.href = "https://wa.me/" + NEGOCIO.whatsapp + "?text=" + encodeURIComponent(t);
+};
+activeCat = cats[0];
+function mostrarPago() {
+  const box = $("pbox"), v = $("pay").value;
+  box.hidden = true; box.textContent = "";
+  if (v === "Transferencia" && NEGOCIO.datosTransferencia) {
+    box.textContent = "Datos para tu transferencia:\n" + NEGOCIO.datosTransferencia + "\nEnvía el comprobante por WhatsApp.";
+    box.hidden = false;
+  } else if (v === "Pago en línea") {
+    const a = document.createElement("a");
+    a.href = NEGOCIO.linkPago.replace("{TOTAL}", (subtotal() + envio()).toFixed(2));
+    a.target = "_blank"; a.rel = "noopener"; a.textContent = "Pagar ahora";
+    box.textContent = "Paga en línea y luego envía tu pedido por WhatsApp con el comprobante.";
+    box.appendChild(a); box.hidden = false;
+  }
+}
+$("pay").onchange = mostrarPago;
+
+function parseCSV(t) {
+  const rows = []; let r = [], c = "", q = false;
+  for (let i = 0; i < t.length; i++) {
+    const ch = t[i];
+    if (q) { if (ch === '"') { if (t[i + 1] === '"') { c += '"'; i++; } else q = false; } else c += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { r.push(c); c = ""; }
+    else if (ch === "\n") { r.push(c); rows.push(r); r = []; c = ""; }
+    else if (ch !== "\r") c += ch;
+  }
+  if (c || r.length) { r.push(c); rows.push(r); }
+  return rows;
+}
+async function cargarHoja() {
+  try {
+    const res = await fetch(NEGOCIO.hojaCSV);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const rows = parseCSV(await res.text());
+    const head = rows.shift().map(h => h.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+    const get = (r, n) => (r[head.indexOf(n)] || "").trim();
+    const menu = rows.map(r => ({
+      cat: get(r, "categoria"),
+      emoji: get(r, "emoji") || "🍽️",
+      nombre: get(r, "nombre"),
+      desc: get(r, "descripcion"),
+      precio: parseFloat(get(r, "precio").replace(/[^0-9.,]/g, "").replace(",", ".")),
+      disp: (get(r, "disponible") || "SI").toUpperCase()
+    })).filter(p => p.nombre && p.cat && !isNaN(p.precio) && p.disp !== "NO");
+    if (!menu.length) throw new Error("hoja vacía");
+    NEGOCIO.menu = menu;
+    cats = [...new Set(menu.map(p => p.cat))];
+    activeCat = cats[0];
+    renderCats(); renderList();
+  } catch (e) { console.warn("No se pudo leer la hoja; se usa el menú del archivo.", e); }
+}
+
+renderCats(); renderList(); updateBar();
+async function cargarApi() {
+  try {
+    const r = await fetch(NEGOCIO.apiUrl + "?action=datos");
+    const d = await r.json();
+    if (!d.ok || !d.menu.length) throw new Error(d.error || "sin productos");
+    Object.entries(d.negocio).forEach(([k, v]) => { if (v && (!Array.isArray(v) || v.length)) NEGOCIO[k] = v; });
+    NEGOCIO.menu = d.menu;
+    Object.keys(cart).forEach(k => delete cart[k]);
+    pintarCabecera();
+    cats = [...new Set(NEGOCIO.menu.map(p => p.cat))];
+    activeCat = cats[0];
+    renderCats(); renderList(); updateBar();
+  } catch (e) { console.warn("No se pudo leer el Apps Script; se usa el menú del archivo.", e); }
+}
+if (NEGOCIO.apiUrl) cargarApi();
+else if (NEGOCIO.hojaCSV) cargarHoja();
+</script>
+</body>
+</html>
