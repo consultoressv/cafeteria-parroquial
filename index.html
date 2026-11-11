@@ -211,7 +211,7 @@ $("send").onclick = async () => {
     try {
       const ctrl = new AbortController();
       setTimeout(() => ctrl.abort(), 10000);
-      const r = await fetch(NEGOCIO.apiUrl, "https://script.google.com/macros/s/AKfycbxxB5cljGUfTIMUVNJucDaVUpcYHEwpk_r7L8lPBVw9FWTGVE7c186PNaAo6b3tjeuFtA/exec") {
+      const r = await fetch(NEGOCIO.apiUrl, "https://script.google.com/macros/s/AKfycbxxB5cljGUfTIMUVNJucDaVUpcYHEwpk_r7L8lPBVw9FWTGVE7c186PNaAo6b3tjeuFtA/exec" {
         method: "POST", signal: ctrl.signal,
         body: JSON.stringify({
           nombre, direccion: dir, entrega: ent.nombre, pago: $("pay").value, nota: $("note").value.trim(),
