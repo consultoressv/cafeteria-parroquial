@@ -106,7 +106,7 @@ const NEGOCIO = {
   pagos: ["Efectivo", "Transferencia"],
   datosTransferencia: "Banco: Banco Agrícola\nCuenta de ahorro: 000-000000-0\nA nombre de: Marta López",
   linkPago: "",                        // opcional, ej.: "https://www.paypal.me/minegocio/{TOTAL}USD"
-  apiUrl: "",   // <<< PEGA AQUÍ LA URL DE TU HOJA DE GOOGLE ENTRE LAS COMILLAS (termina en /exec). Es lo ÚNICO que debes cambiar.
+  apiUrl: "https://script.google.com/macros/s/AKfycbxxB5cljGUfTIMUVNJucDaVUpcYHEwpk_r7L8lPBVw9FWTGVE7c186PNaAo6b3tjeuFtA/exec",   // URL de tu Google Apps Script (termina en /exec)
   hojaCSV: "",                         // opcional: enlace CSV de Google Sheets para el menú diario,
   menu: [
     { cat: "Pupusas", emoji: "🫓", nombre: "Revuelta", desc: "Chicharrón, frijol y queso", precio: 1.25 },
@@ -211,7 +211,7 @@ $("send").onclick = async () => {
     try {
       const ctrl = new AbortController();
       setTimeout(() => ctrl.abort(), 10000);
-      const r = await fetch(NEGOCIO.apiUrl, "https://script.google.com/macros/s/AKfycbxxB5cljGUfTIMUVNJucDaVUpcYHEwpk_r7L8lPBVw9FWTGVE7c186PNaAo6b3tjeuFtA/exec" {
+      const r = await fetch(NEGOCIO.apiUrl, {
         method: "POST", signal: ctrl.signal,
         body: JSON.stringify({
           nombre, direccion: dir, entrega: ent.nombre, pago: $("pay").value, nota: $("note").value.trim(),
